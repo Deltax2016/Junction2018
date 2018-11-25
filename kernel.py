@@ -1,6 +1,7 @@
 import numpy as np
 import pyaudio
 import json
+import apiai
 import requests
 import urllib.request
 import wave
@@ -49,12 +50,7 @@ with sd.Stream(callback=print_sound):
 
  '''
 
-request = apiai.ApiAI('85ab153fdd35474f9c809be0e9c5e025').text_request()
-		request.lang = 'en'
-		request.session_id = 'MentorMeBot'
-		request.query = message.text
-		responseJson = json.loads(request.getresponse().read().decode('utf-8'))
-		response = responseJson['result']['fulfillment']['speech']
+
 r = sr.Recognizer()
 while 1:
 	#r = str(randrange(100))
@@ -71,7 +67,7 @@ while 1:
 	s = 1
 	f = 0
 	while s:
-		threshold = 4000 
+		threshold = 2500 
 		max_value = 0
 		data = stream.read(CHUNK)
 		as_ints = array('h', data)
@@ -111,17 +107,12 @@ while 1:
 	harvard = sr.AudioFile('file.wav')
 	with harvard as source:
 		audio1 = r.record(source)
-	qwe = r.recognize_google(audio1)
-	print(qwe)
-	print('lahi')
-	if qwe=='do you know the way' or qwe=='do you know that way':
-		engine.say("Of course, You should go to the ass hole")\
-		'''text_to_spech('Of course, You should go to the ass hole')
-		song = pyglet.media.load('speech.ogg')
-		song.play()
-		pyglet.app.run()'''
-	elif qwe=='why can i take part in junction' or qwe=='do you know that way':
-		engine.say("Of course, You should go to the ass hole")
-		engine.runAndWait()
-	time.sleep(1)
+	try:
+		qwe = r.recognize_google(audio1)
+		print(qwe)
+		print('lahi')
+		
+	except Exception:
+		pass
+	#time.sleep(1)
 	audio.terminate()

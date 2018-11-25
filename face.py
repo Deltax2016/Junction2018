@@ -28,16 +28,16 @@ getter = None
 if '-get_face_id' in sys.argv:
     getter = face_id_getter()
 
-weights = 'face-detection-adas-0001/FP{}/face-detection-adas-0001.bin'.format(FP)
-config = 'face-detection-adas-0001/FP{}/face-detection-adas-0001.xml'.format(FP)
+weights = 'face-detection-adas-0001/face-detection-adas-0001.bin'.format(FP)
+config = 'face-detection-adas-0001/face-detection-adas-0001.xml'.format(FP)
 
 weights_emotions, config_emotions, emotions = None, None, None
 
 
 
 if len(sys.argv) > 1 and '-use_emotions' in sys.argv:
-    weights_emotions = 'emotions-recognition-retail-0003/FP{}/emotions-recognition-retail-0003.bin'.format(FP)
-    config_emotions = 'emotions-recognition-retail-0003/FP{}/emotions-recognition-retail-0003.xml'.format(FP)
+    weights_emotions = 'emotions-recognition-retail-0003/emotions-recognition-retail-0003.bin'.format(FP)
+    config_emotions = 'emotions-recognition-retail-0003/emotions-recognition-retail-0003.xml'.format(FP)
 framework = 'DLDT'
 
 model = cv2.dnn.readNet(weights, config, framework)
